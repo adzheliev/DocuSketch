@@ -1,0 +1,20 @@
+version: '3'
+services:
+  python-app:
+    build: ./flask_app
+    container_name: flask_appdo
+    ports:
+      - "5000:8080"
+    volumes:
+      - ./flask_app:/app
+    links:
+      - mongodb
+  mongodb:
+    image: mongo
+    restart: always
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: mydatabase
+
